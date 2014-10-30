@@ -1,0 +1,57 @@
+<div class = "row" >
+
+  <% if logged_in? %>
+
+ <!--Begin Voting-->
+  <div class='span0 well text-center'>
+
+    <%= link_to vote_post_path(post, vote: true), method: 'post', remote: true do %>
+        <i class='icon-arrow-up'></i>
+    <% end %>
+
+    <br/>
+    <span id='post_<%=post.slug%>_votes'><%= post.total_votes %> votes</span>
+    <br/>
+
+    <%= link_to vote_post_path(post, vote: false), method: 'post' , remote: true do %>
+        <i class='icon-arrow-down'></i>
+    <% end %>
+
+  </div>
+
+  <% end %>
+ <!--End Voting-->
+
+
+
+  <div class = "span8 well">
+    <%= render post.categories %>   <!--this shortcut is using the block variable for post to get the collection -->
+
+    <h4><%= link_to post.title, fix_url(post.url) %> </h4>
+
+    <p><%= post.description %></p>
+
+    <p>
+      <span class='quiet'>posted by</span> <%= link_to post.creator.username, user_path(post.creator) %>
+      <small>at <%= display_datetime(post.created_at) %></small>
+    </p>
+
+    <small>
+      <span>
+        <%= link_to("#{post.comments.size} comments", post_path(post)) %>
+      </span>
+    </small>
+    <br/>
+    <!--Allow edit only if logged in and the creator -->
+    <% if logged_in? %>
+     <% if (current_user.id == post.user_id) || (current_user.admin?)%>
+        <small>
+            <span>
+            <%= link_to "(Edit Post)", edit_post_path(post) %>
+            </span>
+        </small>
+    <% end %>
+    <% end %>
+
+  </div>
+</div>

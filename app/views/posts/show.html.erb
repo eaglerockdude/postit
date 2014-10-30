@@ -1,0 +1,48 @@
+
+<% if logged_in?  %>
+<% if (current_user.id == @post.user_id) || (current_user.admin?)%>
+<p class = "pull-right">
+  [<%= link_to "edit this post", edit_post_path(@post) %>]
+</p>
+<% end %>
+<% end %>
+
+<p>
+  <%= render @post.categories %>    <!-- This short cut assumes there is a folder categories and a partial _category.-->
+</p>                                <!-- It passes in each member of the object collection, here @post.-->
+
+<%= render 'shared/content_title', title: @post.title %>
+
+<p>
+  <%= @post.description %>
+</p>
+
+<!--Begin create comment form-->
+<% if logged_in? %>
+ <hr/>
+    <%= form_for [@post,@comment] do |f| %>
+
+    <%= render 'shared/errors', act_rec_obj:@comment %>
+
+    <div class='control-group'>
+        <%= f.label :body , "Leave a comment about" %>
+        <h4><%= link_to @post.title %> </h4>
+        <%= f.text_area :body , rows: 3, class: "span4" %>
+    </div>
+
+        <%= f.submit "Create Comment", class: "btn btn-primary" %>
+
+    <% end %>
+<% end %>
+<!--End create comment form-->
+
+<hr/>
+<h5>Comments:</h5>
+
+<% @post.reload.comments.each do |comment| %>
+    <%= render 'comments/comment', comment: comment %>
+<% end %>
+
+<%= link_to 'Go Back', posts_path %>
+
+

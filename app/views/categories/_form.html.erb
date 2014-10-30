@@ -1,0 +1,18 @@
+<%= render 'shared/errors', act_rec_obj:@category %>
+
+<div class = "well" >
+
+  <%= form_for @category do |f| %>
+
+      <div class = "control-group" >
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </div>
+
+      <%= f.submit "Create Category" , class: "btn btn-primary" %>
+
+  <% end %>
+
+  <%= link_to 'Go Back', posts_path %>
+
+</div>

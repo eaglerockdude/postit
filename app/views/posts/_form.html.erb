@@ -1,0 +1,37 @@
+
+<%= render 'shared/errors', act_rec_obj:@post %>
+
+<div class = "well" >
+
+    <%= form_for @post do |f| %>
+
+    <div class = "control-group" >
+        <%= f.label :title %>
+        <%= f.text_field :title %>  <br/>
+    </div>
+
+    <div class = "control-group" >
+        <%= f.label :url %>
+        <%= f.text_field :url %>  <br/>
+    </div>
+
+    <div class = "control-group" >
+        <%= f.label :description %>
+        <%= f.text_area :description , rows: 5 %>
+        <br/>
+     </div>
+
+        <%= f.label "Select Categories:" %>
+        <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
+        <%  cb.label(class: "checkbox inline") {cb.check_box(class: "checkbox") + cb.text}%>
+        <% end %>
+
+        <br/> <br/>
+
+        <%= f.submit(@post.new_record? ? "Create Post" : "Update Post", class: "btn btn-primary" )%>
+
+        <% end %>
+
+        <%= link_to 'Go Back', posts_path %>
+</div>
+
