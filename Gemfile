@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'pry-byebug'
+
 gem "validate_url"
 
 gem 'voteable_kdm', '~> 0.0.2'

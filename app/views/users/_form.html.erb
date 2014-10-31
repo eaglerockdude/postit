@@ -20,6 +20,12 @@
         <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, default: Time.zone.name %>
       </div>
 
+      <div class='control-group'>
+        <%= f.label "Check to make yourself an Administrator role:" %>
+        <%= f.check_box :role , {}, checked_value = "admin", unchecked_value = "user"%>
+
+      </div>
+
       <%= f.submit (@user.new_record? ? "Register" : "Update Profile"), class: 'btn btn-success' %>
 
   <% end %>
