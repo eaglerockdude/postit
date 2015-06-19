@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
    helper_method :current_user, :logged_in? , :access_denied
 
-   # if user logged in return user object else nil  "memoizati ||= "
+   # if user logged in return user object else nil  "memoization ||= "
    def current_user
      @current_user ||= User.find(session[:user_id]) if session[:user_id]
    end
