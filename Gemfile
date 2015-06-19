@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'will_paginate', '~> 3.0.5'
+
 gem 'better_errors'
 
 gem 'pry-byebug'
